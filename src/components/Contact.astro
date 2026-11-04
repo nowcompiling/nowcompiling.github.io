@@ -1,0 +1,8 @@
+---
+// 역할: 연락 주소(mailto) 한 줄. 호출: 첫 화면·글 끝·나의 스토리 끝.
+const MAIL = 'nowcompiling.dev@gmail.com';
+---
+<p class="contact">이 업무, 같이 풀어 볼까요? <a href={`mailto:${MAIL}`}>{MAIL}</a></p>
+<style>
+  .contact { margin-top: 2.5em; padding: 16px 18px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 4px; }
+</style>

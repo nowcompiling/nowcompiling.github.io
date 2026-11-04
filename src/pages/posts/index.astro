@@ -1,0 +1,13 @@
+---
+// 역할: S02 글 목록 전체(최신순)와 글 종류 고르기 링크. 호출: /posts/.
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import KindNav from '../../components/KindNav.astro';
+import { getPublished } from '../../lib/posts';
+const posts = await getPublished();
+---
+<Base title="글">
+  <h1>글</h1>
+  <KindNav />
+  {posts.length ? <PostList posts={posts} /> : <p class="muted">첫 글을 준비하고 있습니다.</p>}
+</Base>

@@ -1,0 +1,21 @@
+---
+// 역할: S03 글 보기(본문·사례 글 캡처·글 끝 연락). 호출: /posts/<글>/.
+import Base from '../../layouts/Base.astro';
+import Contact from '../../components/Contact.astro';
+import { render } from 'astro:content';
+import { getPublished, KIND_LABEL, fmtDate } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  return (await getPublished()).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={post.data.title} description={post.data.summary}>
+  <article>
+    <p class="kind">{KIND_LABEL[post.data.kind]} <span class="muted">· {fmtDate(post.data.date)}</span></p>
+    <h1>{post.data.title}</h1>
+    <Content />
+  </article>
+  <Contact />
+</Base>

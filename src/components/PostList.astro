@@ -1,0 +1,15 @@
+---
+// 역할: 글 목록 한 묶음(제목·종류·날짜·요약). 호출: 첫 화면, 글 목록, 종류별 목록.
+import { KIND_LABEL, fmtDate, type Post } from '../lib/posts';
+interface Props { posts: Post[] }
+const { posts } = Astro.props;
+---
+<ul class="posts">
+  {posts.map((p) => (
+    <li>
+      <span class="kind">{KIND_LABEL[p.data.kind]}</span> <span class="muted">· {fmtDate(p.data.date)}</span><br />
+      <a href={`/posts/${p.id}/`}>{p.data.title}</a>
+      <div class="muted">{p.data.summary}</div>
+    </li>
+  ))}
+</ul>

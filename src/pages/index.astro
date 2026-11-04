@@ -1,8 +1,47 @@
 ---
-// 역할: S01 첫 화면. 호출: 방문자가 / 를 열 때.
+// 역할: S01 첫 화면(정체성·나의 스토리 요약·최신 글·하위 브랜드·연락). 호출: 방문자가 / 를 열 때.
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import Contact from '../components/Contact.astro';
+import { getPublished } from '../lib/posts';
+import { BRANDS } from '../data/brands';
+import { frontmatter as story } from '../story.md';
+
+const latest = (await getPublished()).slice(0, 3);
 ---
-<!doctype html>
-<html lang="ko">
-  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>nowcompiling</title></head>
-  <body><h1>HENRY</h1><p>돌아갈 때까지 만듭니다</p></body>
-</html>
+<Base>
+  <section class="who">
+    <h1>HENRY</h1>
+    <p class="role">Camping Developer<br />AI Automation Maker</p>
+    <p class="core">돌아갈 때까지 만듭니다</p>
+  </section>
+
+  <section>
+    {story.summary.map((line: string) => <p class="story">{line}</p>)}
+    <p><a href="/story/">전체 읽기</a></p>
+  </section>
+
+  <section>
+    <h2>최신 글</h2>
+    {latest.length ? <PostList posts={latest} /> : <p class="muted">첫 글을 준비하고 있습니다.</p>}
+    <p><a href="/posts/">글 전체 보기</a></p>
+  </section>
+
+  {BRANDS.length > 0 && (
+    <section>
+      <h2>운영 중인 서비스</h2>
+      <ul class="posts">
+        {BRANDS.map((b) => <li><a href={b.url}>{b.name}</a><div class="muted">{b.line}</div></li>)}
+      </ul>
+    </section>
+  )}
+
+  <Contact />
+</Base>
+<style>
+  .who { padding: 28px 0 8px; }
+  h1 { font-size: 2.4rem; margin: 0; letter-spacing: .04em; }
+  .role { color: var(--accent); font-size: .85rem; letter-spacing: .2em; text-transform: uppercase; margin: 6px 0 0; }
+  .core { font-size: 1.35rem; font-weight: 700; margin: 18px 0 8px; }
+  .story { margin: .3em 0; }
+</style>

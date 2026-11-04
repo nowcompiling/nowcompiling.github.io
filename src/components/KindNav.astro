@@ -1,0 +1,16 @@
+---
+// 역할: 글 종류 고르기(전체·사례·해봤더니·따라하기). 호출: 글 목록, 종류별 목록.
+import { KIND_LABEL, type Kind } from '../lib/posts';
+interface Props { current?: Kind }
+const { current } = Astro.props;
+const kinds = Object.keys(KIND_LABEL) as Kind[];
+---
+<nav class="kinds">
+  <a href="/posts/" aria-current={!current ? 'page' : undefined}>전체</a>
+  {kinds.map((k) => <a href={`/posts/kind/${k}/`} aria-current={current === k ? 'page' : undefined}>{KIND_LABEL[k]}</a>)}
+</nav>
+<style>
+  .kinds { display: flex; gap: 14px; margin: 0 0 12px; }
+  .kinds a { color: var(--muted); text-decoration: none; }
+  .kinds a[aria-current] { color: var(--accent); font-weight: 700; }
+</style>

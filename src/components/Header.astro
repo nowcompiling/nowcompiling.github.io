@@ -1,0 +1,12 @@
+---
+// 역할: S06 공통 머리줄(첫 화면·글 목록 링크). 호출: Base.astro.
+---
+<header>
+  <a href="/" class="home">nowcompiling</a>
+  <nav><a href="/posts/">글</a></nav>
+</header>
+<style>
+  header { max-width: 680px; margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); }
+  a { color: var(--text); text-decoration: none; }
+  .home { font-weight: 700; letter-spacing: .02em; }
+</style>

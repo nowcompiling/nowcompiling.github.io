@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "check": "astro build && node scripts/check-dist.mjs"
+    "check": "ASTRO_POSTS=./tests/fixtures/posts ASTRO_OUT=dist-test astro build && node scripts/check-dist.mjs dist-test --fixtures && astro build && node scripts/check-dist.mjs dist"
   },
   "dependencies": {
     "astro": "7.4.5"

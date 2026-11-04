@@ -1,0 +1,11 @@
+---
+// 역할: S04 나의 스토리 전문. 호출: 첫 화면 "전체 읽기" → /story/.
+import Base from '../layouts/Base.astro';
+import Contact from '../components/Contact.astro';
+import { Content } from '../story.md';
+---
+<Base title="나의 스토리">
+  <h1>나의 스토리</h1>
+  <Content />
+  <Contact />
+</Base>

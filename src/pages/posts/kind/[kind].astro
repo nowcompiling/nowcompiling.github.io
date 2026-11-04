@@ -1,0 +1,18 @@
+---
+// 역할: S02 글 종류별 목록과 빈 종류 안내. 호출: /posts/kind/<case|tried|howto>/.
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import KindNav from '../../../components/KindNav.astro';
+import { getPublished, KIND_LABEL, type Kind } from '../../../lib/posts';
+
+export function getStaticPaths() {
+  return (['case', 'tried', 'howto'] as const).map((kind) => ({ params: { kind } }));
+}
+const kind = Astro.params.kind as Kind;
+const posts = await getPublished(kind);
+---
+<Base title={KIND_LABEL[kind]}>
+  <h1>글</h1>
+  <KindNav current={kind} />
+  {posts.length ? <PostList posts={posts} /> : <p class="muted">아직 이 종류의 글이 없습니다.</p>}
+</Base>
