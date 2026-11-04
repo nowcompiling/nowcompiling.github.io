@@ -1,0 +1,13 @@
+{
+  "name": "nowcompiling-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro build && node scripts/check-dist.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.5"
+  }
+}
